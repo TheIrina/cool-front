@@ -3,7 +3,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 const Hero = () => {
   return (
-    <div className="h-[94vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle -mt-[100px]">
+    <div className="h-screen w-full border-b border-ui-border-base relative bg-ui-bg-subtle -mt-[100px]">
       {/* Preload de la imagen poster con alta prioridad para mejorar el LCP */}
       <link
         rel="preload"
@@ -20,7 +20,7 @@ const Hero = () => {
         playsInline
         preload="metadata"
         poster="/hero-poster.avif"
-        className="absolute inset-0 w-full h-full object-cover max-h-[94vh]"
+        className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/hero.mp4" type="video/mp4" />
       </video>
