@@ -4,7 +4,7 @@ import Banner from "@modules/layout/components/banner"
 
 const Hero = () => {
   return (
-    <div className="h-[calc(100vh+64px)] w-full border-b border-ui-border-base relative bg-ui-bg-subtle -mt-16">
+    <div className="h-screen w-full border-b border-ui-border-base relative bg-ui-bg-subtle -mt-16">
       {/* Preload de la imagen poster con alta prioridad para mejorar el LCP */}
       <link
         rel="preload"
