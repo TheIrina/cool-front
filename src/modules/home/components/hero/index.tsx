@@ -34,20 +34,20 @@ const Hero = () => {
         <span>
           <Heading
             level="h1"
-            className="text-3xl leading-10 text-white font-normal"
+            className="text-4xl leading-10 text-white font-normal"
           >
-            Cool Bordados
+            Supera tus límites con estilo
           </Heading>
           <Heading
             level="h2"
-            className="text-3xl leading-10 text-white font-normal"
+            className="text-xl leading-8 text-white font-light"
           >
-            Bordados personalizados de alta calidad
+            Ropa deportiva de alto rendimiento diseñada para moverse contigo
           </Heading>
         </span>
         <LocalizedClientLink href="/store">
           <Button variant="secondary">
-            Explorar productos
+            Descubrir colección
           </Button>
         </LocalizedClientLink>
       </div>
