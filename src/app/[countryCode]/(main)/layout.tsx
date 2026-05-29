@@ -8,7 +8,7 @@ import CartMismatchBanner from "@modules/layout/components/cart-mismatch-banner"
 import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
-import WhatsAppFAB from "@modules/layout/components/whatsapp-fab"
+import InstagramFAB from "@modules/layout/components/instagram-fab"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -40,7 +40,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
         />
       )}
       {props.children}
-      <WhatsAppFAB />
+      <InstagramFAB />
       <Footer />
     </>
   )

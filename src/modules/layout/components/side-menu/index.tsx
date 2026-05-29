@@ -62,14 +62,14 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Panel className="relative flex w-full max-w-[320px] flex-col bg-black shadow-2xl overflow-hidden rounded-3xl h-full pointer-events-auto">
+              <Dialog.Panel className="relative flex w-full max-w-[320px] flex-col bg-black shadow-2xl overflow-hidden rounded-2xl h-full pointer-events-auto">
                 <div className="flex flex-col h-full text-neutral-200">
                   {/* Header - Similar to CollectionsDropdown header */}
                   <div className="flex items-center justify-between p-5 bg-black">
                     <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Menú</h3>
                     <button
                       onClick={close}
-                      className="p-1 hover:bg-neutral-800 rounded-lg transition-colors"
+                      className="p-1 hover:bg-neutral-800 rounded-full transition-colors"
                       data-testid="close-menu-button"
                     >
                       <XMark className="w-5 h-5" />
@@ -82,7 +82,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                       <LocalizedClientLink
                         key={name}
                         href={href}
-                        className="px-4 py-3 rounded-xl hover:bg-neutral-800/80 hover:text-white transition-all duration-200 text-sm font-medium flex items-center justify-between group"
+                        className="px-4 py-3 rounded-full hover:bg-neutral-800/80 hover:text-white transition-all duration-200 text-sm font-medium flex items-center justify-between group"
                         onClick={close}
                         data-testid={`${name.toLowerCase()}-link`}
                       >
