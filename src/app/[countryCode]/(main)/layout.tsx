@@ -8,7 +8,6 @@ import CartMismatchBanner from "@modules/layout/components/cart-mismatch-banner"
 import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
-import WhatsAppPopup from "@modules/layout/components/whatsapp-popup"
 import WhatsAppFAB from "@modules/layout/components/whatsapp-fab"
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   return (
     <>
       <Nav />
-      <WhatsAppPopup />
       {customer && cart && (
         <CartMismatchBanner customer={customer} cart={cart} />
       )}
