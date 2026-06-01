@@ -93,8 +93,13 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
       isMercadopago(method) ||
       isContraEntrega(method)
     ) {
+      const sessionData = isMercadopago(method)
+        ? { session_id: cart.id }
+        : {}
+
       await initiatePaymentSession(cart, {
         provider_id: method,
+        data: sessionData,
       }).catch(() => {
         setError(
           "Error al iniciar la sesión de pago. Por favor intenta nuevamente."
@@ -160,8 +165,13 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
         activeSession?.provider_id === selectedPaymentMethod
 
       if (!checkActiveSession) {
+        const sessionData = isMercadopago(selectedPaymentMethod)
+          ? { session_id: cart.id }
+          : {}
+
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
+          data: sessionData,
         })
       }
 
@@ -175,24 +185,6 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
           pathname + "?" + createQueryString("step", "review"),
           { scroll: false }
         )
-      }
-
-      if (isMp && !window.paymentBrickController) {
-        return
-      }
-
-      if (isMp) {
-        const brickAdditionalData =
-          await window.paymentBrickController!.getAdditionalData()
-        const brickFormData =
-          await window.paymentBrickController!.getFormData()
-        if (brickAdditionalData) {
-          setAdditionalData(brickAdditionalData)
-        }
-        if (!brickFormData) {
-          return
-        }
-        setFormData(brickFormData)
       }
 
       if (!shouldInputCard) {
@@ -209,33 +201,6 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
       setIsLoading(false)
     }
   }
-
-  const handleMpBrickSubmit = async () => {
-    const brickAdditionalData =
-      await window.paymentBrickController?.getAdditionalData()
-    const brickFormData =
-      await window.paymentBrickController?.getFormData()
-    if (brickAdditionalData) {
-      setAdditionalData(brickAdditionalData)
-    }
-    if (brickFormData) {
-      setFormData(brickFormData)
-      router.push(pathname + "?" + createQueryString("step", "review"), {
-        scroll: false,
-      })
-    }
-  }
-
-  // ── Lifecycle: MercadoPago Brick cleanup ─────────────────────────────
-  useEffect(() => {
-    window.paymentBrickController?.unmount()
-  }, [selectedPaymentMethod])
-
-  useEffect(() => {
-    return () => {
-      window.paymentBrickController?.unmount()
-    }
-  }, [])
 
   useEffect(() => {
     setError(null)
@@ -264,6 +229,5 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
     setTermsAccepted,
     handleEdit,
     handleSubmit,
-    handleMpBrickSubmit,
   }
 }

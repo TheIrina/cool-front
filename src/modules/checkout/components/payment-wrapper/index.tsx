@@ -29,12 +29,7 @@ const PaymentWrapper: React.FC<PaymentWrapperProps> = ({ cart, children }) => {
   ) {
     return (
       <PaymentFormProvider>
-        <MercadopagoWrapper
-          mercadopagoKey={mercadopagoKey}
-          paymentSession={paymentSession}
-        >
-          {children}
-        </MercadopagoWrapper>
+        <div>{children}</div>
       </PaymentFormProvider>
     )
   }

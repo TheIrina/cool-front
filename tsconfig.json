@@ -17,8 +17,8 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "ignoreDeprecations": "5.0",
-    "baseUrl": "/src",
+    "ignoreDeprecations": "6.0",
+    "baseUrl": "./src",
     "paths": {
       "@lib/*": [
         "lib/*"

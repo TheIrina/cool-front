@@ -16,7 +16,6 @@ import PaymentContainer, {
 import Divider from "@modules/common/components/divider"
 import Checkbox from "@modules/common/components/checkbox"
 import ContraEntregaForm from "@modules/checkout/components/payment/contra-entrega-form"
-import { Payment as MpPaymentBrick } from "@mercadopago/sdk-react"
 import type { PaymentViewProps } from "../types/payment.types"
 
 /**
@@ -48,7 +47,6 @@ export const PaymentView = ({
   setTermsAccepted,
   handleEdit,
   handleSubmit,
-  handleMpBrickSubmit,
   availablePaymentMethods,
   cart,
 }: PaymentViewProps) => {
@@ -127,26 +125,19 @@ export const PaymentView = ({
                             </div>
                           )}
 
-                        {/* MercadoPago Brick */}
+                        {/* MercadoPago Checkout Pro Banner */}
                         {isMercadopago(paymentMethod.id) &&
                           selectedPaymentMethod === paymentMethod.id && (
-                            <div className="p-4 bg-ui-bg-subtle border border-t-0 rounded-b-rounded -mt-2 mb-4">
-                              <MpPaymentBrick
-                                initialization={{ amount: mpInitAmount }}
-                                customization={{
-                                  paymentMethods: {
-                                    creditCard: "all",
-                                    debitCard: "all",
-                                  },
-                                  visual: {
-                                    hidePaymentButton: false,
-                                    hideFormTitle: true,
-                                  },
-                                }}
-                                onSubmit={async () => {
-                                  await handleMpBrickSubmit()
-                                }}
-                              />
+                            <div className="p-5 bg-neutral-50 border border-neutral-200 rounded-lg flex flex-col gap-y-3 mb-4 mt-2">
+                              <div className="flex items-center gap-x-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+                                <h4 className="text-sm font-semibold text-neutral-800">
+                                  Mercado Pago (Checkout Pro)
+                                </h4>
+                              </div>
+                              <p className="text-xs text-neutral-600 leading-relaxed">
+                                Al hacer clic en <strong>"Pagar con Mercado Pago"</strong> en el último paso, serás redirigido de forma 100% segura para completar tu compra. Podrás pagar usando tarjetas de crédito, débito, PSE, Efecty u otros medios locales disponibles.
+                              </p>
                             </div>
                           )}
                       </>
@@ -177,7 +168,7 @@ export const PaymentView = ({
           />
 
           {/* Action buttons */}
-          {!isMp && !isCoEntrega && (
+          {!isCoEntrega && (
             <Button
               size="large"
               className="mt-6"

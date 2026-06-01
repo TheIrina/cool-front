@@ -73,7 +73,7 @@ const StripePaymentButton = ({
 
   const onPaymentCompleted = async () => {
     await placeOrder()
-      .catch((err) => {
+      .catch((err: any) => {
         setErrorMessage(err.message)
       })
       .finally(() => {
@@ -189,51 +189,37 @@ const MercadopagoPaymentButton = ({
 }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const onPaymentCompleted = async () => {
-    await placeOrder()
-      .catch((err) => {
-        setErrorMessage(err.message)
-      })
-      .finally(() => {
-        setSubmitting(false)
-      })
-  }
-
-  const { formData, additionalData } = useMercadopagoFormData()
 
   const session = cart.payment_collection?.payment_sessions?.find(
-    (s) => s.status === "pending"
+    (s) => s.provider_id === "mercadopago" || s.provider_id.startsWith("pp_mercadopago")
   )
-
-  const disabled = false
 
   const handlePayment = async () => {
     setSubmitting(true)
     setErrorMessage(null)
 
     if (!cart || !session) {
+      setErrorMessage("No se encontró una sesión de pago activa para Mercado Pago.")
       setSubmitting(false)
-      return
-    }
-
-    if (!formData) {
-      const params = new URLSearchParams(searchParams)
-      params.set("step", "payment")
-      router.push(`${pathname}?${params.toString()}`)
-      setSubmitting(false)
-      setErrorMessage("Por favor, ingrese sus datos de pago nuevamente.")
       return
     }
 
     try {
-      await confirmMercadopagoPayment(session.id, formData.formData)
-      onPaymentCompleted()
+      const { init_point, sandbox_init_point } = session.data as {
+        init_point?: string
+        sandbox_init_point?: string
+      }
+
+      const isSandbox = process.env.NEXT_PUBLIC_MERCADOPAGO_SANDBOX === "true"
+      const redirectUrl = isSandbox ? sandbox_init_point : init_point
+
+      if (!redirectUrl) {
+        throw new Error("No se pudo obtener la URL de redirección del servidor de pago.")
+      }
+
+      window.location.href = redirectUrl
     } catch (e: unknown) {
-      setErrorMessage(e instanceof Error ? e.message : "Error al procesar el pago")
+      setErrorMessage(e instanceof Error ? e.message : "Error al inicializar la pasarela.")
       setSubmitting(false)
     }
   }
@@ -241,18 +227,21 @@ const MercadopagoPaymentButton = ({
   return (
     <>
       <Button
-        disabled={disabled || notReady}
+        disabled={notReady}
         onClick={handlePayment}
+        className="w-full"
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
       >
-        Place order
+        Pagar con Mercado Pago
       </Button>
-      <ErrorMessage
-        error={errorMessage}
-        data-testid="mercadopago-payment-error-message"
-      />
+      {errorMessage && (
+        <ErrorMessage
+          error={errorMessage}
+          data-testid="mercadopago-payment-error-message"
+        />
+      )}
     </>
   )
 }
@@ -263,7 +252,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
 
   const onPaymentCompleted = async () => {
     await placeOrder()
-      .catch((err) => {
+      .catch((err: any) => {
         setErrorMessage(err.message)
       })
       .finally(() => {
@@ -313,7 +302,7 @@ const ContraEntregaPaymentButton = ({
 
   const onPaymentCompleted = async () => {
     await placeOrder()
-      .catch((err) => {
+      .catch((err: any) => {
         setErrorMessage(err.message)
       })
       .finally(() => {

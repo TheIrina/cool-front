@@ -67,7 +67,6 @@ export interface UsePaymentReturn {
   setTermsAccepted: (accepted: boolean) => void
   handleEdit: () => void
   handleSubmit: () => Promise<void>
-  handleMpBrickSubmit: () => Promise<void>
 }
 
 /** Props for the pure view component (payment-view.tsx). */
