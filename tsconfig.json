@@ -17,20 +17,21 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": "./src",
     "paths": {
+      "types/*": [
+        "./src/types/*"
+      ],
       "@lib/*": [
-        "lib/*"
+        "./src/lib/*"
       ],
       "@modules/*": [
-        "modules/*"
+        "./src/modules/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "./src/pages/*"
       ],
       "@features/*": [
-        "features/*"
+        "./src/features/*"
       ]
     },
     "plugins": [
