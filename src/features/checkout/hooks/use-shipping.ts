@@ -119,6 +119,9 @@ export function useShipping(
     })
 
     await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
+      .then(() => {
+        router.refresh()
+      })
       .catch((err: Error) => {
         setShippingMethodId(currentId)
         setError(err.message)

@@ -100,11 +100,15 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
       await initiatePaymentSession(cart, {
         provider_id: method,
         data: sessionData,
-      }).catch(() => {
-        setError(
-          "Error al iniciar la sesión de pago. Por favor intenta nuevamente."
-        )
       })
+        .then(() => {
+          router.refresh()
+        })
+        .catch(() => {
+          setError(
+            "Error al iniciar la sesión de pago. Por favor intenta nuevamente."
+          )
+        })
     }
   }
 
@@ -173,6 +177,7 @@ export function usePayment(cart: HttpTypes.StoreCart): UsePaymentReturn {
           provider_id: selectedPaymentMethod,
           data: sessionData,
         })
+        router.refresh()
       }
 
       if (isCoEntrega) {
