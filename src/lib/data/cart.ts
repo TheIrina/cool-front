@@ -14,6 +14,7 @@ import {
   setCartId,
 } from "./cookies"
 import { getRegion } from "./regions"
+import { cookies, headers } from "next/headers"
 
 /**
  * Retrieves a cart by its ID. If no ID is provided, it will use the cart ID from the cookies.
@@ -22,7 +23,8 @@ import { getRegion } from "./regions"
  */
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
-  fields ??= "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
+  fields ??=
+    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
 
   if (!id) {
     return null
@@ -40,7 +42,7 @@ export async function retrieveCart(cartId?: string, fields?: string) {
     .fetch<HttpTypes.StoreCartResponse>(`/store/carts/${id}`, {
       method: "GET",
       query: {
-        fields
+        fields,
       },
       headers,
       next,
@@ -57,7 +59,7 @@ export async function getOrSetCart(countryCode: string) {
     throw new Error(`Region not found for country code: ${countryCode}`)
   }
 
-  let cart = await retrieveCart(undefined, 'id,region_id')
+  let cart = await retrieveCart(undefined, "id,region_id")
 
   const headers = {
     ...(await getAuthHeaders()),
@@ -336,10 +338,24 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     if (!formData) {
       throw new Error("No form data found when setting addresses")
     }
-    const cartId = getCartId()
+    const cartId = await getCartId()
     if (!cartId) {
       throw new Error("No existing cart found when setting addresses")
     }
+
+    const cookieStore = await cookies()
+    const fbp = cookieStore.get("_fbp")?.value
+    const fbc = cookieStore.get("_fbc")?.value
+
+    const headersList = await headers()
+    const clientUserAgent = headersList.get("user-agent") || ""
+    const clientIp = headersList.get("x-forwarded-for")?.split(",")?.[0]?.trim() || headersList.get("x-real-ip") || ""
+
+    const metadata: Record<string, string> = {}
+    if (fbp) metadata.fbp = fbp
+    if (fbc) metadata.fbc = fbc
+    if (clientUserAgent) metadata.client_user_agent = clientUserAgent
+    if (clientIp) metadata.client_ip = clientIp
 
     const data = {
       shipping_address: {
@@ -355,6 +371,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         phone: formData.get("shipping_address.phone"),
       },
       email: formData.get("email"),
+      metadata: Object.keys(metadata).length > 0 ? metadata : undefined,
     } as HttpTypes.StoreUpdateCart
 
     const sameAsBilling = formData.get("same_as_billing")
