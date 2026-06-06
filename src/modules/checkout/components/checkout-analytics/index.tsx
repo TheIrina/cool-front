@@ -11,6 +11,10 @@ export default function CheckoutAnalytics({ cart }: { cart: HttpTypes.StoreCart 
     if (trackedCartId.current === cart.id) return
     trackedCartId.current = cart.id
 
+    const sessionKey = `tracked_checkout_${cart.id}`
+    if (sessionStorage.getItem(sessionKey)) return
+    sessionStorage.setItem(sessionKey, "true")
+
     const currency = cart.currency_code?.toUpperCase() || "USD"
     const value = cart.subtotal ? cart.subtotal / 100 : 0
     const items = cart.items || []
