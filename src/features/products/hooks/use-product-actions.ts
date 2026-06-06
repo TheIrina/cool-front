@@ -119,6 +119,36 @@ export function useProductActions(
       countryCode,
     })
 
+    const price = selectedVariant.calculated_price?.calculated_amount 
+      ? selectedVariant.calculated_price.calculated_amount / 100
+      : 0
+    const currency = selectedVariant.calculated_price?.currency_code?.toUpperCase() || "USD"
+
+    if (typeof window.fbq === "function") {
+      window.fbq('track', 'AddToCart', {
+        content_type: 'product',
+        content_ids: [selectedVariant.id],
+        content_name: product.title,
+        value: price * quantity,
+        currency: currency
+      }, { eventID: `add_${selectedVariant.id}_${Date.now()}` })
+    }
+
+    if (typeof window.gtag === "function") {
+      window.gtag('event', 'add_to_cart', {
+        currency: currency,
+        value: price * quantity,
+        items: [
+          {
+            item_id: selectedVariant.id,
+            item_name: product.title,
+            price: price,
+            quantity: quantity
+          }
+        ]
+      })
+    }
+
     setIsAdding(false)
   }
 

@@ -10,6 +10,7 @@ import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-relat
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
+import ProductAnalytics from "@modules/products/components/product-analytics"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -28,6 +29,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
+      <ProductAnalytics product={product} region={region} />
       <div
         className="content-container flex flex-col small:grid small:grid-cols-2 gap-8 py-6 relative"
         data-testid="product-container"
