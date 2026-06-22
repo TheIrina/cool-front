@@ -4,6 +4,7 @@ import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import WorkBanner from "@modules/home/components/work-banner"
 import GoogleReviews from "@modules/home/components/reviews"
+import MapEmbed from "@modules/home/components/map-embed"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
@@ -56,6 +57,7 @@ export default async function Home(props: {
         <WorkBanner />
       </div>
       <GoogleReviews />
+      <MapEmbed />
     </>
   )
 }
