@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { Button, Heading } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import Banner from "@modules/layout/components/banner"
 import Image from "next/image"
 
 const IMAGES = [
@@ -35,7 +34,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <div className="h-screen w-full border-b border-ui-border-base relative bg-ui-bg-subtle -mt-16 overflow-hidden">
+    <div className="h-[calc(100vh-116px)] w-full border-b border-ui-border-base relative bg-ui-bg-subtle overflow-hidden">
       {/* Imágenes de fondo con transición suave de opacidad */}
       {IMAGES.map((img, index) => {
         const isActive = index === currentIndex
@@ -95,10 +94,6 @@ const Hero = () => {
             Descubrir colección
           </Button>
         </LocalizedClientLink>
-      </div>
-
-      <div className="absolute bottom-0 inset-x-0 z-20">
-        <Banner />
       </div>
     </div>
   )

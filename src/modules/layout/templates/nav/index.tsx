@@ -6,19 +6,35 @@ import SearchModal from "@modules/search/components/search-modal"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import CollectionsDropdown from "@modules/layout/components/collections-dropdown"
+import Image from "next/image"
+import Banner from "@modules/layout/components/banner"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
 
   return (
     <>
-      <header className="sticky top-0 inset-x-0 z-50 h-16 mx-auto duration-200 bg-transparent mix-blend-difference text-white">
-        <nav className="content-container txt-xsmall-plus text-white flex items-center justify-between w-full h-full text-small-regular">
+      <header className="sticky top-0 inset-x-0 z-50 mx-auto duration-200 bg-black text-white">
+        <nav className="content-container txt-xsmall-plus text-white flex items-center justify-between w-full h-20 text-small-regular">
           {/* Left Section: Mobile Menu & Logo */}
           <div className="flex items-center gap-x-4">
-            <div className="h-full">
+            <div className="h-full flex items-center">
               <SideMenu regions={regions} />
             </div>
+            <LocalizedClientLink
+              href="/"
+              className="flex items-center"
+              data-testid="nav-logo-link"
+            >
+              <Image
+                src="/webm/LOGO BLANCO COOLBORDADOS.webp"
+                alt="Cool Bordados Logo"
+                width={150}
+                height={40}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </LocalizedClientLink>
           </div>
 
           {/* Center Section: Navigation Links (Desktop) */}
@@ -66,6 +82,7 @@ export default async function Nav() {
             </Suspense>
           </div>
         </nav>
+        <Banner />
       </header>
     </>
   )
