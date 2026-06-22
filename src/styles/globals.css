@@ -6,8 +6,8 @@
 @custom-variant dark (&:where(.dark, [data-mode=dark], .dark *, [data-mode=dark] *));
 
 @theme {
-  --font-sans: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-sans: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+  --font-bebas: var(--font-bebas-neue), "Bebas Neue", sans-serif;
 
   --transition-property-width: width, margin;
   --transition-property-height: height;
@@ -207,6 +207,15 @@ body,
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+body {
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
+  background-color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6, .font-bebas {
+  font-family: var(--font-bebas-neue), "Bebas Neue", sans-serif;
 }
 
 html::-webkit-scrollbar,

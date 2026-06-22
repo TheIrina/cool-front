@@ -1,11 +1,23 @@
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "../styles/globals.css"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { Bebas_Neue, Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { AnalyticsProvider } from "@modules/layout/components/analytics"
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas-neue",
+  display: "swap",
+})
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -14,9 +26,9 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="es"
       data-mode="light"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${bebasNeue.variable} ${openSans.variable}`}
       suppressHydrationWarning
     >
       <body className="bg-white">

@@ -64,34 +64,46 @@ export const ProductActionsView = ({
           )}
         </div>
 
-        {/* Price Display */}
-        <ProductPrice
-          product={product}
-          variant={selectedVariant}
-          quantity={quantity}
-        />
+        {/* Row: Price & Add to Cart Button */}
+        <div className="flex flex-row items-center gap-x-6 w-full justify-between mt-4">
+          <ProductPrice
+            product={product}
+            variant={selectedVariant}
+            quantity={quantity}
+          />
 
-        {/* Add to Cart Button */}
-        <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-10"
-          isLoading={isAdding}
-          data-testid="add-product-button"
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            variant="primary"
+            className="h-12 bg-black hover:bg-zinc-900 border border-[#939393] text-white px-4 rounded-md font-bebas text-lg font-normal tracking-wider uppercase flex items-center justify-center flex-1"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant && !options
+              ? "Seleccionar variante"
+              : !inStock || !isValidVariant
+                ? "Agotado"
+                : "Añadir al carrito"}
+          </Button>
+        </div>
+
+        {/* WhatsApp Customization Button */}
+        <a
+          href={`https://wa.me/573114330332?text=Hola!%20Quiero%20personalizar%20este%20producto:%20${encodeURIComponent(product.title)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full h-12 bg-[#22c55e] hover:bg-[#1eab52] text-white font-bebas text-lg font-normal tracking-wider uppercase flex items-center justify-center rounded-md transition-colors shadow-sm select-none cursor-pointer mt-2"
         >
-          {!selectedVariant && !options
-            ? "Seleccionar variante"
-            : !inStock || !isValidVariant
-              ? "Agotado"
-              : `Agregar ${quantity} al carrito`}
-        </Button>
+          Personalizar este producto
+        </a>
+
         <MobileActions
           product={product}
           variant={selectedVariant}

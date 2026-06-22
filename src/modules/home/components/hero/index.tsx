@@ -74,26 +74,30 @@ const Hero = () => {
       {/* Overlay para mejorar la legibilidad del texto */}
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-4xl leading-10 text-white font-normal"
+      <div className="absolute inset-0 z-10 flex flex-col justify-between items-center small:items-start text-center small:text-left content-container py-12 small:py-24">
+        <h1 className="text-3xl small:text-6xl md:text-7xl font-bold uppercase tracking-wider text-white select-none font-bebas leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center w-full small:w-auto mt-4 small:mt-8">
+          TEN UN DISEÑO <span className="text-[#ff3131]">EXCLUSIVO</span> CON<br /> COOL <span className="text-[#ff3131]">BORDADOS</span>
+        </h1>
+        
+        <div className="flex flex-row gap-3 small:gap-6 w-full max-w-[340px] small:max-w-[540px] mb-4 small:mb-8">
+          {/* Button 1: DISEÑAR AHORA */}
+          <a
+            href="https://wa.me/573114330332?text=Hola!%20Quiero%20dise%C3%B1ar%20un%20bordado%20personalizado."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-2.5 px-4 small:py-3.5 small:px-8 bg-[#c31f1f] text-white font-bebas font-bold tracking-wider text-sm small:text-xl rounded-md transition-all duration-200 uppercase text-center border-2 border-transparent hover:bg-[#a11818] shadow-lg select-none cursor-pointer"
           >
-            Supera tus límites con estilo
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-xl leading-8 text-white font-light"
+            Diseñar Ahora
+          </a>
+
+          {/* Button 2: VER CATALOGO */}
+          <LocalizedClientLink
+            href="/store"
+            className="flex-1 py-2.5 px-4 small:py-3.5 small:px-8 bg-black text-white font-bebas font-bold tracking-wider text-sm small:text-xl rounded-md border-2 border-[#939393] transition-all duration-200 uppercase text-center hover:bg-zinc-900 shadow-lg select-none cursor-pointer"
           >
-            Ropa deportiva de alto rendimiento diseñada para moverse contigo
-          </Heading>
-        </span>
-        <LocalizedClientLink href="/store">
-          <Button variant="secondary">
-            Descubrir colección
-          </Button>
-        </LocalizedClientLink>
+            Ver Catalogo
+          </LocalizedClientLink>
+        </div>
       </div>
     </div>
   )

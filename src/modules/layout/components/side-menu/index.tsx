@@ -9,16 +9,15 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
 
-const SideMenuItems = {
-  Inicio: "/",
-  Tienda: "/store",
-  Cuenta: "/account",
-  Carrito: "/cart",
-}
+const SideMenuItems = [
+  { name: "INICIO", href: "/" },
+  { name: "COLECCIONES", href: "/store" },
+  { name: "PERSONALIZAR", href: "https://wa.me/573114330332?text=Hola!%20Quiero%20personalizar%20un%20producto." },
+  { name: "TIENDA", href: "/store" },
+]
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggleState = useToggleState()
 
   const open = () => setIsOpen(true)
   const close = () => setIsOpen(false)
@@ -51,7 +50,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
           </Transition.Child>
 
-          <div className="fixed inset-0 flex p-4 sm:p-6 pointer-events-none">
+          <div className="fixed inset-0 flex pointer-events-none">
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-200"
@@ -61,56 +60,51 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Panel className="relative flex w-full max-w-[320px] flex-col bg-black shadow-2xl overflow-hidden rounded-2xl h-full pointer-events-auto">
-                <div className="flex flex-col h-full text-neutral-200">
-                  {/* Header - Similar to CollectionsDropdown header */}
-                  <div className="flex items-center justify-between p-5 bg-black">
-                    <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Menú</h3>
+              <Dialog.Panel className="relative flex w-full max-w-[280px] flex-col bg-black shadow-2xl overflow-hidden h-full pointer-events-auto">
+                <div className="flex flex-col h-full text-white">
+                  {/* Header: MENU | X */}
+                  <div className="flex items-center justify-between px-6 py-5 bg-[#151515] border-b border-neutral-900">
+                    <h3 className="text-2xl font-normal text-white uppercase font-bebas tracking-widest">
+                      MENU
+                    </h3>
                     <button
                       onClick={close}
-                      className="p-1 hover:bg-neutral-800 rounded-full transition-colors"
+                      className="text-2xl font-normal text-white uppercase font-bebas tracking-widest hover:opacity-80 transition-opacity"
                       data-testid="close-menu-button"
                     >
-                      <XMark className="w-5 h-5" />
+                      X
                     </button>
                   </div>
 
-                  {/* Navigation Links - Matching dropdown style */}
-                  <div className="flex-1 overflow-y-auto p-2 flex flex-col gap-1 no-scrollbar">
-                    {Object.entries(SideMenuItems).map(([name, href]) => (
-                      <LocalizedClientLink
-                        key={name}
-                        href={href}
-                        className="px-4 py-3 rounded-full hover:bg-neutral-800/80 hover:text-white transition-all duration-200 text-sm font-medium flex items-center justify-between group"
-                        onClick={close}
-                        data-testid={`${name.toLowerCase()}-link`}
-                      >
-                        {name}
-                        <svg 
-                          width="16" height="16" viewBox="0 0 24 24" fill="none" 
-                          className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+                  {/* Navigation Links */}
+                  <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6 no-scrollbar bg-black">
+                    {SideMenuItems.map((item) => {
+                      const isExternal = item.href.startsWith("http")
+                      if (isExternal) {
+                        return (
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-2xl font-normal text-white uppercase tracking-wider font-bebas hover:text-[#ff3131] transition-colors duration-200 text-left"
+                            onClick={close}
+                          >
+                            {item.name}
+                          </a>
+                        )
+                      }
+                      return (
+                        <LocalizedClientLink
+                          key={item.name}
+                          href={item.href}
+                          className="text-2xl font-normal text-white uppercase tracking-wider font-bebas hover:text-[#ff3131] transition-colors duration-200 text-left"
+                          onClick={close}
                         >
-                          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </LocalizedClientLink>
-                    ))}
-                  </div>
-
-                  {/* Footer - Minimal and integrated */}
-                  <div className="p-4 bg-black space-y-4">
-                    <div className="px-2">
-                      {regions && (
-                        <CountrySelect
-                          toggleState={toggleState}
-                          regions={regions}
-                        />
-                      )}
-                    </div>
-                    <div className="px-2 pt-4">
-                      <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-medium">
-                        © {new Date().getFullYear()} Cool Bordados
-                      </p>
-                    </div>
+                          {item.name}
+                        </LocalizedClientLink>
+                      )
+                    })}
                   </div>
                 </div>
               </Dialog.Panel>

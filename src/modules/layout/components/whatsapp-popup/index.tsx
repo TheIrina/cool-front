@@ -62,10 +62,10 @@ export default function WhatsAppPopup() {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-sm transform overflow-hidden bg-white shadow-xl border rounded-rounded p-6 transition-all">
+                            <Dialog.Panel className="w-full max-w-sm sm:max-w-md transform overflow-hidden bg-white shadow-xl border rounded-rounded p-6 sm:p-8 transition-all">
                                 {/* Header con título y botón cerrar */}
-                                <Dialog.Title className="flex items-center justify-between mb-4">
-                                    <div className="text-large-semi text-ui-fg-base">
+                                <Dialog.Title as="div" className="flex items-center justify-between mb-4 font-sans">
+                                    <div className="text-base font-normal text-ui-fg-base font-sans uppercase tracking-[0.7em]">
                                         Productos Personalizados
                                     </div>
                                     <button

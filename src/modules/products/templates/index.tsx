@@ -3,7 +3,6 @@ import React, { Suspense } from "react"
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
-import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
@@ -40,13 +39,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         </div>
 
         {/* Right Column: Product Info & Actions */}
-        <div className="flex flex-col w-full py-8 small:py-0 gap-y-12 pl-0 small:pl-12">
+        <div className="flex flex-col w-full py-8 small:py-0 gap-y-8 pl-0 small:pl-12">
           <div className="flex flex-col gap-y-6">
             <ProductInfo product={product} />
-            <ProductTabs product={product} />
           </div>
-          <div className="flex flex-col gap-y-12">
-            <ProductOnboardingCta />
+          
+          <div className="flex flex-col gap-y-6">
             <Suspense
               fallback={
                 <ProductActions
@@ -58,6 +56,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             >
               <ProductActionsWrapper id={product.id} region={region} />
             </Suspense>
+          </div>
+
+          <div className="flex flex-col gap-y-6">
+            <ProductOnboardingCta />
           </div>
         </div>
       </div>
