@@ -16,7 +16,7 @@ const doubleSet = [...singleSet, ...singleSet]
 
 const Banner = () => {
   return (
-    <div className="bg-white text-black py-2 border-b border-ui-border-base overflow-hidden whitespace-nowrap">
+    <div className="bg-[#efefef] text-black py-2 border-b border-ui-border-base overflow-hidden whitespace-nowrap">
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
         {doubleSet.map((msg, index) => (
           <span key={index} className="mx-8 text-sm font-light flex items-center gap-2">

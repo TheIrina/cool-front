@@ -38,11 +38,11 @@ export default async function ProductPreview({
           isFeatured={isFeatured}
         />
         <div className="flex flex-col items-center mt-4 text-center gap-y-1">
-          <Text className="text-sm font-medium uppercase text-black tracking-wide leading-tight" data-testid="product-title">
+          <Text className="text-lg font-normal uppercase text-black tracking-wider leading-tight font-bebas" data-testid="product-title">
             {product.title}
           </Text>
           {(product.collection || product.type) && (
-            <span className="text-[11px] font-medium text-gray-400 uppercase tracking-widest">
+            <span className="text-xs font-normal text-gray-400 uppercase tracking-widest font-bebas">
               {product.collection?.title || product.type?.value}
             </span>
           )}

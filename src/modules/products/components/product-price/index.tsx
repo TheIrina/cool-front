@@ -58,11 +58,10 @@ export default function ProductPrice({
           <span className="text-sm text-ui-fg-subtle">Total:</span>
         )}
         <span
-          className={clx("text-xl-semi", {
+          className={clx("text-4xl font-normal font-bebas text-black", {
             "text-ui-fg-interactive": selectedPrice.price_type === "sale",
           })}
         >
-          {!variant && "Desde "}
           <span
             data-testid="product-price"
             data-value={totalPrice}
