@@ -28,13 +28,12 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
       <div className="flex items-center h-full">
         <button
           onClick={open}
-          className="flex items-center gap-x-2 h-full transition-all duration-200 hover:text-gray-300 focus:outline-none"
+          className="flex items-center h-full transition-all duration-200 hover:text-gray-300 focus:outline-none"
           data-testid="nav-menu-button"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 8H20M4 16H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
-          <span className="uppercase font-medium tracking-wider text-[10px]">Menú</span>
         </button>
       </div>
 
