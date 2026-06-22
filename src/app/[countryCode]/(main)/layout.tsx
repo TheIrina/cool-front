@@ -9,6 +9,7 @@ import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
 import InstagramFAB from "@modules/layout/components/instagram-fab"
+import FirstVisitModal from "@modules/layout/components/first-visit-modal"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -41,6 +42,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
       )}
       {props.children}
       <InstagramFAB />
+      <FirstVisitModal />
       <Footer />
     </>
   )
