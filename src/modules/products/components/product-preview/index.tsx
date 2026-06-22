@@ -38,12 +38,12 @@ export default async function ProductPreview({
           isFeatured={isFeatured}
         />
         <div className="flex flex-col items-center mt-4 text-center gap-y-1">
-          <Text className="text-sm font-bold uppercase text-black tracking-wide leading-tight" data-testid="product-title">
+          <Text className="text-sm font-medium uppercase text-black tracking-wide leading-tight" data-testid="product-title">
             {product.title}
           </Text>
-          {product.collection && (
-            <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
-              {product.collection.title}
+          {(product.collection || product.type) && (
+            <span className="text-[11px] font-medium text-gray-400 uppercase tracking-widest">
+              {product.collection?.title || product.type?.value}
             </span>
           )}
           <div className="flex items-center justify-center gap-x-2 mt-0.5">
