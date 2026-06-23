@@ -1,4 +1,5 @@
 import React from "react"
+import Image from "next/image"
 
 interface Review {
   id: string
@@ -140,7 +141,13 @@ export default function GoogleReviews() {
           </div>
           <span className="text-xs text-zinc-500 font-medium">A base de 309 reseñas</span>
           <div className="mt-1">
-            <GoogleWordmark />
+            <Image
+              src="/ICONOS/Google-logo.webp"
+              alt="Google Logo"
+              width={90}
+              height={30}
+              className="object-contain h-7 w-auto"
+            />
           </div>
         </div>
 
