@@ -87,3 +87,8 @@ export const noDivisionCurrencies = [
   "xdr",
   "xau",
 ]
+
+export const CONTACT_INFO = {
+  phone: "+57 317 095 9368",
+  whatsapp: "573170959368",
+}

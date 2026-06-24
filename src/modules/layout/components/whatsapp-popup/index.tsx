@@ -2,8 +2,9 @@
 
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment, useState, useEffect } from "react"
+import { CONTACT_INFO } from "@lib/constants"
 
-const WHATSAPP_NUMBER = "573114330332"
+const WHATSAPP_NUMBER = CONTACT_INFO.whatsapp
 const WHATSAPP_MESSAGE = encodeURIComponent(
     "Hola! Estoy interesado en un producto personalizado de Cool Bordados. ¿Podrían ayudarme con más información?"
 )
