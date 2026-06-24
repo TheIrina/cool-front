@@ -11,8 +11,8 @@ const features = [
 
 export default function MapEmbed() {
   // Free Google Maps iframe embed using place search parameters
-  const query = encodeURIComponent("Cool Bordados, Roldanillo, Cl. 9 #7-26")
-  const src = `https://maps.google.com/maps?q=${query}&t=&z=16&ie=UTF8&iwloc=&output=embed`
+  const query = encodeURIComponent("Cool Bordados, Roldanillo, Cra. 5 #9-09")
+  const src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.990348778319!2d-76.15271649999997!3d4.412894599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38376affc5dee7%3A0x7458ba4eed87aa4b!2sCra.%205%20%239-9%2C%20Roldanillo%2C%20Valle%20del%20Cauca!5e0!3m2!1sen!2sco!4v1782332633089!5m2!1sen!2sco`
 
   return (
     <div className="content-container pb-16">
