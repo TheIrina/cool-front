@@ -9,10 +9,12 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
 
+import { CONTACT_INFO } from "@lib/constants"
+
 const SideMenuItems = [
   { name: "INICIO", href: "/" },
   { name: "COLECCIONES", href: "/store" },
-  { name: "PERSONALIZAR", href: "https://wa.me/573114330332?text=Hola!%20Quiero%20personalizar%20un%20producto." },
+  { name: "PERSONALIZAR", href: `https://wa.me/${CONTACT_INFO.whatsapp}?text=Hola!%20Quiero%20personalizar%20un%20producto.` },
   { name: "TIENDA", href: "/store" },
 ]
 

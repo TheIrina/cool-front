@@ -7,6 +7,7 @@ import QuantitySelector from "@modules/products/components/product-actions/quant
 import ProductPrice from "@modules/products/components/product-price"
 import MobileActions from "@modules/products/components/product-actions/mobile-actions"
 import type { ProductActionsViewProps } from "../types/product-actions.types"
+import { CONTACT_INFO } from "@lib/constants"
 
 /**
  * ProductActionsView — "The Face" of the ProductActions feature.
@@ -96,7 +97,7 @@ export const ProductActionsView = ({
 
         {/* WhatsApp Customization Button */}
         <a
-          href={`https://wa.me/573114330332?text=Hola!%20Quiero%20personalizar%20este%20producto:%20${encodeURIComponent(product.title)}`}
+          href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=Hola!%20Quiero%20personalizar%20este%20producto:%20${encodeURIComponent(product.title)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full h-12 bg-[#22c55e] hover:bg-[#1eab52] text-white font-bebas text-lg font-normal tracking-wider uppercase flex items-center justify-center rounded-md transition-colors shadow-sm select-none cursor-pointer mt-2"

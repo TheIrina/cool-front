@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button, Heading } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
+import { CONTACT_INFO } from "@lib/constants"
 
 const IMAGES = [
   {
@@ -82,7 +83,7 @@ const Hero = () => {
         <div className="flex flex-row gap-3 small:gap-6 w-full max-w-[340px] small:max-w-[540px] mb-4 small:mb-8">
           {/* Button 1: DISEÑAR AHORA */}
           <a
-            href="https://wa.me/573114330332?text=Hola!%20Quiero%20dise%C3%B1ar%20un%20bordado%20personalizado."
+            href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=Hola!%20Quiero%20dise%C3%B1ar%20un%20bordado%20personalizado.`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 py-2.5 px-4 small:py-3.5 small:px-8 bg-[#c31f1f] text-white font-bebas font-bold tracking-wider text-sm small:text-xl rounded-md transition-all duration-200 uppercase text-center border-2 border-transparent hover:bg-[#a11818] shadow-lg select-none cursor-pointer"

@@ -2,6 +2,7 @@
 
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment, useEffect, useState } from "react"
+import { CONTACT_INFO } from "@lib/constants"
 
 export default function FirstVisitModal() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +20,7 @@ export default function FirstVisitModal() {
   }
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/573114330332", "_blank", "noopener,noreferrer")
+    window.open(`https://wa.me/${CONTACT_INFO.whatsapp}`, "_blank", "noopener,noreferrer")
     setIsOpen(false)
   }
 
