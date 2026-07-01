@@ -8,6 +8,7 @@ import { getCacheOptions } from "./cookies"
 export const listRegions = async () => {
   const next = {
     ...(await getCacheOptions("regions")),
+    revalidate: 3600,
   }
 
   return sdk.client
@@ -23,6 +24,7 @@ export const listRegions = async () => {
 export const retrieveRegion = async (id: string) => {
   const next = {
     ...(await getCacheOptions(["regions", id].join("-"))),
+    revalidate: 3600,
   }
 
   return sdk.client
@@ -35,10 +37,20 @@ export const retrieveRegion = async (id: string) => {
     .catch(medusaError)
 }
 
-const regionMap = new Map<string, HttpTypes.StoreRegion>()
+const REGION_MAP_TTL = 5 * 60 * 1000 // 5 minutes
+let regionMap = new Map<string, HttpTypes.StoreRegion>()
+let regionMapUpdated = 0
 
 export const getRegion = async (countryCode: string) => {
   try {
+    const now = Date.now()
+
+    // Clear in-memory cache if it's older than TTL
+    if (regionMap.size > 0 && now - regionMapUpdated > REGION_MAP_TTL) {
+      regionMap = new Map<string, HttpTypes.StoreRegion>()
+      regionMapUpdated = 0
+    }
+
     if (regionMap.has(countryCode)) {
       return regionMap.get(countryCode)
     }
@@ -54,6 +66,8 @@ export const getRegion = async (countryCode: string) => {
         regionMap.set(c?.iso_2 ?? "", region)
       })
     })
+
+    regionMapUpdated = now
 
     const region = countryCode
       ? regionMap.get(countryCode)

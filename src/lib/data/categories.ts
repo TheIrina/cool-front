@@ -5,6 +5,7 @@ import { getCacheOptions } from "./cookies"
 export const listCategories = async (query?: Record<string, string | number>) => {
   const next = {
     ...(await getCacheOptions("categories")),
+    revalidate: 3600,
   }
 
   const limit = query?.limit || 100
@@ -31,6 +32,7 @@ export const getCategoryByHandle = async (categoryHandle: string[]) => {
 
   const next = {
     ...(await getCacheOptions("categories")),
+    revalidate: 3600,
   }
 
   return sdk.client

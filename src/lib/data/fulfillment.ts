@@ -11,6 +11,7 @@ export const listCartShippingMethods = async (cartId: string) => {
 
   const next = {
     ...(await getCacheOptions("fulfillment")),
+    revalidate: 3600,
   }
 
   return sdk.client
@@ -43,6 +44,7 @@ export const calculatePriceForShippingOption = async (
 
   const next = {
     ...(await getCacheOptions("fulfillment")),
+    revalidate: 3600,
   }
 
   const body = { cart_id: cartId, data }

@@ -474,6 +474,7 @@ export async function listCartOptions() {
   }
   const next = {
     ...(await getCacheOptions("shippingOptions")),
+    revalidate: 3600,
   }
 
   return await sdk.client.fetch<{

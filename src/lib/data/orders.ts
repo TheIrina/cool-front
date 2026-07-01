@@ -12,6 +12,7 @@ export const retrieveOrder = async (id: string) => {
 
   const next = {
     ...(await getCacheOptions("orders")),
+    revalidate: 3600,
   }
 
   return sdk.client
@@ -43,6 +44,7 @@ export const listOrders = async (
 
   const next = {
     ...(await getCacheOptions("orders")),
+    revalidate: 3600,
   }
 
   return sdk.client

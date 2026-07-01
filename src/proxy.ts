@@ -7,7 +7,7 @@ const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
 
 const regionMapCache = {
   regionMap: new Map<string, HttpTypes.StoreRegion>(),
-  regionMapUpdated: Date.now(),
+  regionMapUpdated: 0,
 }
 
 async function getRegionMap(cacheId: string) {
