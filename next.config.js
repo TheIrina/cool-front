@@ -57,6 +57,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "coolback.tradicional-coffee.shop",
       },
+      {
+        protocol: "https",
+        hostname: "pub-a39771482bdf4cedb03a12dc1e6f79be.r2.dev",
+      },
     ],
   },
 }
