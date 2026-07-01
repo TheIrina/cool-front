@@ -53,6 +53,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cool.irinacloud.co",
       },
+      {
+        protocol: "https",
+        hostname: "coolback.tradicional-coffee.shop",
+      },
     ],
   },
 }
